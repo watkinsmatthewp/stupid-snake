@@ -17,6 +17,10 @@ body {
   background-color: #eeeeee;
 }
 
+h1 {
+  text-align: center;
+}
+
 #grid {
   border: 1px solid black;
 }
