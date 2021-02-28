@@ -91,6 +91,7 @@ class Snake {
 class Game {
   constructor(config) {
     this.config = config;
+    this.isStarted = false;
   }
 
   init() {
@@ -98,6 +99,10 @@ class Game {
     this.snake = new Snake(midPoint);
     this.apple = this.getRandomEmptyPointOnGrid();
     this.snakeOrientation = new Coordinate(1, 0);
+  }
+
+  start() {
+    this.isStarted = true;
   }
 
   getMidpoint() {
@@ -131,23 +136,5 @@ class Game {
     if (this.snake.headCoordinate.equals(this.apple)) {
       this.apple = this.getRandomEmptyPointOnGrid();
     }
-  }
-
-  print() {
-    let s = "";
-    for (let y = 0; y < this.config.gridSize.y; y++) {
-      for (let x = 0; x < this.config.gridSize.x; x++) {
-        const coordinate = new Coordinate(x, y);
-        if (this.snake.bodyOccupies(coordinate)) {
-          s += "S";
-        } else if (this.apple.equals(coordinate)) {
-          s += "A";
-        } else {
-          s += ".";
-        }
-      }
-      s += "\n";
-    }
-    return s;
   }
 }

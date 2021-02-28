@@ -1,6 +1,8 @@
 const game = new Game({
   autoMoveIntervalMs: 250,
-  gridSize: new Coordinate(10, 10)
+  gridSize: new Coordinate(12, 12),
+  cellSizePx: 30,
+  cellPaddingPx: 1
 });
 const painter = new GamePainter(document.getElementById("grid"));
 
@@ -10,7 +12,7 @@ painter.paintGame(game);
 const controller = new GameLoopController(game, painter);
 
 window.addEventListener('keydown', function(event) {
-  if (!event.defaultPrevented) {
+  if (!event.defaultPrevented && game.isStarted) {
     switch (event.code) {
       case "KeyS":
       case "ArrowDown":
@@ -37,4 +39,7 @@ function loopCallback(currentTimestampMs) {
   requestAnimationFrame(loopCallback);
 }
 
-requestAnimationFrame(loopCallback);
+function startGame() {
+  game.start();
+  requestAnimationFrame(loopCallback);
+}
